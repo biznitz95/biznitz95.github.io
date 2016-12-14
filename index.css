@@ -1,0 +1,12 @@
+body {
+  background-image: url("image1.jpg");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-attachment: fixed;
+}
+
+#main-content {
+  text-align: center;
+  color: white;
+  margin-top: 200px;
+}
