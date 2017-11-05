@@ -3,15 +3,30 @@ body {
   background-repeat: no-repeat;
   background-position: right top;
   background-attachment: fixed;
+  margin: 0 0; /* bottom = footer height */
+}
+
+/* Menu Section */
+#menu {
+	background-image: url("menu.png");
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	z-index: 1;
+	height: 50px;
+	width: 50px;
 }
 
 /* Header Section*/
 #Header {
     margin-top: 200px;
-    background-color: #fff;
+    background-color: #F6EDD3;
     height: 200px;
     border-radius: 10px;
     opacity: .6;
+	color: #0A1829;
+	margin-left: 300px;
+	margin-right: 300px;
 }
 
 #headerText {
@@ -38,7 +53,47 @@ body {
 /* Boxes*/
 #mainBox {
     margin-top: 150px;
-    border-radius: 10px;
-    height: 850px;
-    background-color: #fff;
+    border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+    height: 800px;
+    background-color: #F6EDD3;
+	opacity: .6;
+	z-index: -1;
+}
+
+#box1 {
+	position: absolute;
+	z-index: 0;
+	margin-top: 2.5px;
+	margin-bottom: 2.5px;
+	margin-left: 2.5px;
+	margin-right: 2.5px;
+	width: 700px;
+	height:400px;
+	background-color: #CCD9CE;
+	border-radius: 10px;
+}
+
+#box2 {
+	position: absolute;
+	right: 0;
+	z-index: 0;
+	margin-top: 2.5px;
+	margin-bottom: 2.5px;
+	margin-left: 2.5px;
+	margin-right: 2.5px;
+	width: 700px;
+	height:400px;
+	background-color: #CCD9CE;
+	border-radius: 10px;
+}
+
+#contact {
+	background-color: #0A1829;
+	position: static;
+    left: 0;
+    bottom: 0;
+    height: 250px;
+    width: 100%;
+    overflow:hidden;
 }
