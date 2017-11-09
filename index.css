@@ -6,17 +6,6 @@ body {
   margin: 0 0; /* bottom = footer height */
 }
 
-/* Menu Section */
-#menu {
-	background-image: url("menu.png");
-	top: 0;
-	left: 0;
-	cursor: pointer;
-	z-index: 1;
-	height: 50px;
-	width: 50px;
-}
-
 /* Header Section*/
 #Header {
     margin-top: 200px;
@@ -27,10 +16,11 @@ body {
 	color: #0A1829;
 	margin-left: 300px;
 	margin-right: 300px;
+
 }
 
 #headerText {
-    font-size: 60px;
+    font-size: 50px;
     text-align: center;
 }
 
@@ -39,15 +29,39 @@ body {
     text-align: center;
 }
 
+/* Menu */
+#menu {
+	background-color: #F6EDD3;
+	left: 0;
+	top: 0;
+	width: 100px;
+	height: 100px;
+	opacity: .6;
+	position: absolute;
+}
+
+/* Inner Menu */
+#innerMenu {
+	height: 100px;
+	width: 100px;
+	background-image: url("menu.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+	left: 0;
+	top: 0;
+	cursor: pointer;
+}
+
 /* Arrow 1*/
 #arrow1 {
-    margin-top: 200px;
+    margin-top: 190px;
     margin-left: 46%;
     height: 100px;
     width: 100px;
     background-image: url("arrow1.png");
     border-radius: 50px;
 	cursor: pointer;
+	position: relative;
 }
 
 /* Boxes*/
