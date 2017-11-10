@@ -1,0 +1,8 @@
+	Needs Fixing
+1) Need to fix the bottom box going up too high
+2) Loop for arrow causes problems
+3) Fix image sizing for all devices
+4) Look into jose's glitch on the Menu
+
+	Needs to be added
+1) Idk... stuff

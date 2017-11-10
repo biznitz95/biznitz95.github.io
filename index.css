@@ -4,6 +4,7 @@ body {
   background-position: right top;
   background-attachment: fixed;
   margin: 0 0; /* bottom = footer height */
+  object-fit: cover;
 }
 
 /* Header Section*/
