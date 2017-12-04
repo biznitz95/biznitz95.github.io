@@ -1,8 +1,0 @@
-<Response>
-<Say voice="alice">
-Hello, Hooman!
-</Say>
-<Dial record="true">
-<Conference>Full Stack Python</Conference>
-</Dial>
-</Response>
