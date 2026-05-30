@@ -351,6 +351,7 @@ main, .topbar { position: relative; z-index: 2; }
   .hero-content { max-width: 100%; }
   .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; width: 100%; }
   .hero-cta .btn { width: 100%; }
+  .hero-hud { display: none; }
   .hud-corners { display: none; }
   .reel { display: none; }
   .about-grid { grid-template-columns: 1fr; }
