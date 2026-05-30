@@ -1,58 +1,367 @@
 <!DOCTYPE html>
-<!-- Test commit ->
-<!-- Second -->
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="index.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <title>
-            Bizet Rodriguez
-        </title>
-    </head>
-    <body>
-		<div class = "user">
-			<h1>Hello Worlds!</h1>
-			<h3 id="loader">Please enter your name...</h3>
-			<input type="text" placeholder="Your name">
-			<button>Let Me In!</button>
-		</div>
-		<div class="container">
-			<!-- This is the menu -->
-			<div id = "menu">
-				<div id="innerMenu"></div>
-			</div>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bizet Rodriguez — Maker · Roboticist · AI Tinkerer</title>
+<meta name="description" content="The workshop of Bizet Rodriguez — robotics, 3D printing, and AI builds." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Oswald:wght@500;700&family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&family=Teko:wght@500;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="site/site.css?v=15" />
+<style>
+  /* ---- Tweaks panel + easter-egg styling (kept with the page) ---- */
+  .tweaks { position: fixed; top: 0; right: 0; bottom: 0; width: 320px; z-index: 80;
+    background: rgba(11,13,20,.96); backdrop-filter: blur(14px); border-left: 1px solid var(--line-2);
+    transform: translateX(105%); transition: transform .3s cubic-bezier(.2,.7,.2,1);
+    display: flex; flex-direction: column; font-family: var(--mono); color: var(--text); }
+  .tweaks.open { transform: none; box-shadow: -20px 0 60px rgba(0,0,0,.5); }
+  .tweaks .tw-head { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+  .tweaks .tw-head h3 { font-family: var(--display); font-size: 22px; margin: 0; letter-spacing: .04em; }
+  .tweaks .tw-close { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; }
+  .tweaks .tw-body { padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 26px; }
+  .tw-group > label { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--faint); display: block; margin-bottom: 12px; }
+  .tw-swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+  .tw-sw { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--line-2); cursor: pointer; transition: .15s; position: relative; }
+  .tw-sw.sel { transform: scale(1.12); }
+  .tw-sw.sel::after { content: ""; position: absolute; inset: -6px; border: 1.5px solid #fff; border-radius: 50%; }
+  .tw-fonts { display: flex; flex-direction: column; gap: 8px; }
+  .tw-font { text-align: left; border: 1px solid var(--line-2); background: transparent; color: var(--muted); cursor: pointer; padding: 11px 14px; font-size: 22px; text-transform: uppercase; transition: .15s; }
+  .tw-font:hover { border-color: var(--accent); color: var(--text); }
+  .tw-font.sel { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 16px var(--glow); }
+  .tw-row { display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .tw-switch { position: relative; width: 44px; height: 24px; }
+  .tw-switch input { opacity: 0; width: 0; height: 0; }
+  .tw-track { position: absolute; inset: 0; background: var(--line-2); border-radius: 20px; transition: .2s; cursor: pointer; }
+  .tw-track::before { content: ""; position: absolute; left: 3px; top: 3px; width: 18px; height: 18px; background: #fff; border-radius: 50%; transition: .2s; }
+  .tw-switch input:checked + .tw-track { background: var(--accent); }
+  .tw-switch input:checked + .tw-track::before { transform: translateX(20px); }
+  .tw-note { font-size: 11px; color: var(--faint); line-height: 1.6; border-top: 1px solid var(--line); padding-top: 16px; }
 
-	        <!-- This Section Contains the First Header-->
-	        <div id ="Header">
-	            <h1 id ="headerText"></h1>
-	            	<p id="paragraph1" class="text"></p>
-			<a href="newpage">New Page</a>
-	        </div>
-	        <!-- Arrow to slide down -->
-	        <div id="arrow1"></div>
-	        <!-- Main Body -->
-	        <!-- Contains 4 Boxes-->
-	        <div id="mainBox">
-		    <div id="box1"></div>
-	            <div id="box2"></div>
-	            <div id="box3"></div>
-	            <div id="box4"></div>
-	        </div>
+  /* konami */
+  body.rampage { animation: hue 1.2s linear infinite; }
+  @keyframes hue { to { filter: hue-rotate(360deg); } }
+  .konami-toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 200;
+    font-family: var(--mono); font-size: 14px; letter-spacing: .1em; color: var(--accent-ink);
+    background: var(--accent); padding: 12px 22px; box-shadow: 0 0 40px var(--glow); }
+</style>
+</head>
+<body>
 
-			<!-- Bottom Contact Info Box -->
-			<div id = "contact"></div>
-		</div>
-		<script src="index.js"></script>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131202010-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+<div class="fx-grid"></div>
+<div class="fx-noise"></div>
+<div class="fx-scan"></div>
 
-		  gtag('config', 'UA-131202010-1');
-		</script>
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <a href="#top" class="logo"><span class="blink"></span>BIZET</a>
+  <nav>
+    <a href="#work"><span class="n">01</span>Work</a>
+    <a href="#about"><span class="n">02</span>About</a>
+    <a href="#skills"><span class="n">03</span>Skills</a>
+    <a href="#log"><span class="n">04</span>Log</a>
+    <a href="#contact"><span class="n">05</span>Contact</a>
+  </nav>
+  <button class="menu-btn" aria-label="Menu">☰</button>
+</header>
 
-    </body>
+<div class="mobile-menu">
+  <span class="close">✕ close</span>
+  <a href="#work">Work</a>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#log">Log</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero-track">
+  <section class="hero">
+    <div class="bg-glow"></div>
+
+    <div class="hero-stage">
+      <div class="hud-corners"><span class="tl"></span><span class="tr"></span><span class="bl"></span><span class="br"></span></div>
+      <video class="hero-char" poster="site/hero-poster.png" muted playsinline preload="auto" aria-label="Bizet — cyberpunk character"><source src="site/hero-character.webm?v=2" type="video/webm" /><source src="site/hero-character.mp4" type="video/mp4" /></video>
+    </div>
+
+    <div class="hero-hud">
+      <div class="live">SYSTEM ONLINE</div>
+      <div>37.30°N / 120.48°W</div>
+      <div>BUILD v2026.5</div>
+    </div>
+
+    <div class="hero-content">
+      <span class="eyebrow"><span class="ebtext">Bizet Rodriguez</span></span>
+      <h1 class="hero-headline"><span class="l1">Brain to</span><span class="l2">built thing.</span></h1>
+      <p class="hero-sub">3D printing, robotics &amp; AI out of a one-person workshop. This is where the ideas get made real.</p>
+      <div class="hero-cta">
+        <a href="#work" class="btn primary">Explore the work ↓</a>
+        <a href="#contact" class="btn">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="reel">
+      <span class="label"><b>Welcome</b> &nbsp;/&nbsp; 01—04</span>
+      <div class="dots">
+        <span class="dot active"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+      <div class="arrows">
+        <button class="prev" aria-label="Previous">‹</button>
+        <button class="next" aria-label="Next">›</button>
+      </div>
+    </div>
+
+    <div class="scroll-hint">SCROLL<span class="bar"></span></div>
+  </section>
+  </div>
+
+  <!-- ============ WORK ============ -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="kicker reveal">
+        <span class="idx">[ 01 ]</span>
+        <h2>Selected Builds</h2>
+        <span class="rule"></span>
+        <span class="meta">FROM CAD TO WORKING MACHINE</span>
+      </div>
+
+      <div class="work-grid">
+        <a href="project.html" class="proj big clip reveal">
+          <div class="pimg"><image-slot id="work-selfdriving" src="site/img/self-driving.jpg" placeholder="Self-driving car" fit="cover"></image-slot></div>
+          <span class="pnum">BUILD_01</span>
+          <span class="pstatus">IN PROGRESS</span>
+          <div class="pbody">
+            <span class="ptag">Robotics · AI</span>
+            <h3>Self-Driving Vehicle</h3>
+            <p>A LiDAR rover built on a robotics kit chassis that I'm making drive itself — mapping its surroundings and sensing obstacles. Autonomy still very much in progress.</p>
+            <span class="more">See the build →</span>
+          </div>
+        </a>
+
+        <a href="project-pokeball.html" class="proj sm clip reveal">
+          <div class="pimg"><image-slot id="work-pokeball" src="site/img/espeon.jpg" placeholder="Pokéball models" fit="cover"></image-slot></div>
+          <span class="pnum">BUILD_02</span>
+          <span class="pstatus">PRINTED</span>
+          <div class="pbody">
+            <span class="ptag">3D Modeling</span>
+            <h3>Poké Ball Collection</h3>
+            <p>Custom-modeled Poké Balls — including an Espeon ball &amp; Great Ball.</p>
+            <span class="more">See the prints →</span>
+          </div>
+        </a>
+
+        <a href="project-porsche.html" class="proj wide clip reveal">
+          <div class="pimg"><image-slot id="work-porsche" src="site/img/porsche.jpg" placeholder="RC Porsche" fit="cover"></image-slot></div>
+          <span class="pnum">BUILD_03</span>
+          <span class="pstatus">DRIVEABLE</span>
+          <div class="pbody">
+            <span class="ptag">3D Printing · RC</span>
+            <h3>RC Porsche 911 GT3 RS</h3>
+            <p>A fully 3D-printed Porsche 911 GT3 RS body on an RC chassis — printed, sanded, and hand-painted in candy purple over many late nights.</p>
+            <span class="more">See the build →</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about" style="background:var(--bg-2);">
+    <div class="wrap">
+      <div class="kicker reveal">
+        <span class="idx">[ 02 ]</span>
+        <h2>Who's Behind It</h2>
+        <span class="rule"></span>
+        <span class="meta">$ WHOAMI</span>
+      </div>
+
+      <div class="about-grid">
+        <div class="terminal clip reveal">
+          <div class="tbar">
+            <i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i>
+            <span class="t">bizet@workshop — zsh — 80×24</span>
+          </div>
+          <div class="tbody"></div>
+        </div>
+
+        <div class="about-side">
+          <div class="portrait clip reveal">
+            <image-slot id="portrait" src="site/img/pokeballs.jpg" placeholder="Drop a photo of you (or your bench)" fit="cover"></image-slot>
+            <div class="tagline">// the bench where it all happens</div>
+          </div>
+          <div class="now-card clip reveal">
+            <h4>// Currently</h4>
+            <div class="now-row"><span class="k">building</span><span class="v">teaching the <b>self-driving car</b> to see</span></div>
+            <div class="now-row"><span class="k">watching</span><span class="v"><b>One Punch Man</b> · Dragon Ball Z · Mob Psycho 100</span></div>
+            <div class="now-row"><span class="k">training</span><span class="v"><b>Muay Thai</b> — keeping the hands fast</span></div>
+            <div class="now-row"><span class="k">eating</span><span class="v">way too many <b>loaded nachos</b> 🌮</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section class="section" id="skills">
+    <div class="wrap">
+      <div class="kicker reveal">
+        <span class="idx">[ 03 ]</span>
+        <h2>The Toolkit</h2>
+        <span class="rule"></span>
+        <span class="meta">WHAT I BUILD WITH</span>
+      </div>
+
+      <div class="skill-cols">
+        <div class="skill-cat clip reveal">
+          <h4><span class="ic">◐</span> Design &amp; CAD</h4>
+          <div class="chips"><span class="chip">Fusion 360</span><span class="chip">FreeCAD</span><span class="chip">Onshape</span><span class="chip">Blender</span><span class="chip">Parametric</span></div>
+        </div>
+        <div class="skill-cat clip reveal">
+          <h4><span class="ic">▣</span> Fabrication</h4>
+          <div class="chips"><span class="chip">FDM</span><span class="chip">Resin</span><span class="chip">Slicing</span><span class="chip">Tolerances</span><span class="chip">Post-processing</span></div>
+        </div>
+        <div class="skill-cat clip reveal">
+          <h4><span class="ic">⌘</span> Code</h4>
+          <div class="chips"><span class="chip">Python</span><span class="chip">C / C++</span><span class="chip">JavaScript</span><span class="chip">Arduino</span><span class="chip">ROS</span><span class="chip">Linux</span></div>
+        </div>
+        <div class="skill-cat clip reveal">
+          <h4><span class="ic">✦</span> AI / ML</h4>
+          <div class="chips"><span class="chip">PyTorch</span><span class="chip">OpenCV</span><span class="chip">Computer Vision</span><span class="chip">Edge Inference</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUILD LOG ============ -->
+  <section class="section" id="log" style="background:var(--bg-2);">
+    <div class="wrap">
+      <div class="kicker reveal">
+        <span class="idx">[ 04 ]</span>
+        <h2>Build Log</h2>
+        <span class="rule"></span>
+        <span class="meta">NOTES FROM THE WORKSHOP</span>
+      </div>
+
+      <div class="log-list">
+        <div class="log reveal">
+          <div class="lthumb"><image-slot id="log-1" src="site/img/self-driving-2.jpg" placeholder="thumb" fit="cover"></image-slot></div>
+          <span class="ldate">2026 · 05</span>
+          <div><span class="ltags">Robotics · AI</span><h3>Teaching a car to see with LiDAR</h3><p>Bringing up the sensor stack on my self-driving build — and the long road to autonomy.</p></div>
+          <span class="larrow">→</span>
+        </div>
+        <div class="log reveal">
+          <div class="lthumb"><image-slot id="log-2" src="site/img/porsche-paint.jpg" placeholder="thumb" fit="cover"></image-slot></div>
+          <span class="ldate">2026 · 03</span>
+          <div><span class="ltags">3D Printing</span><h3>Painting a printed Porsche candy purple</h3><p>Sanding, priming, and laying down metallic coats on the GT3 RS body.</p></div>
+          <span class="larrow">→</span>
+        </div>
+        <div class="log reveal">
+          <div class="lthumb"><image-slot id="log-3" src="site/img/greatball.jpg" placeholder="thumb" fit="cover"></image-slot></div>
+          <span class="ldate">2026 · 01</span>
+          <div><span class="ltags">3D Modeling</span><h3>Designing Poké Balls that print clean</h3><p>Clean seam lines and crisp color changes — no multi-material printer needed.</p></div>
+          <span class="larrow">→</span>
+        </div>
+        <div class="log reveal">
+          <div class="lthumb"><image-slot id="log-4" src="site/img/porsche-primer.jpg" placeholder="thumb" fit="cover"></image-slot></div>
+          <span class="ldate">2025 · 11</span>
+          <div><span class="ltags">3D Printing</span><h3>Splitting a car body to fit the bed</h3><p>Cutting the Porsche into printable panels and gluing it back seamless.</p></div>
+          <span class="larrow">→</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section contact" id="contact">
+    <div class="wrap reveal">
+      <span class="eyebrow" style="justify-content:center;">Open to collaborations &amp; opportunities</span>
+      <h2 class="big display">Let's build<br /><span class="accent-text">something.</span></h2>
+      <p class="sub">Robotics, prints, AI, or something that doesn't have a name yet — if you're working on something cool, I want to hear about it.</p>
+      <div class="socials">
+        <a href="https://www.instagram.com/biznitz95/" target="_blank" rel="noopener" class="btn primary">Instagram ↗</a>
+        <a href="https://www.linkedin.com/in/bizet-r-b5b102129/" target="_blank" rel="noopener" class="btn">LinkedIn ↗</a>
+        <a href="https://github.com/biznitz95" target="_blank" rel="noopener" class="btn">GitHub ↗</a>
+        <a href="https://www.tiktok.com/@biznitz1995" target="_blank" rel="noopener" class="btn">TikTok ↗</a>
+        <a href="https://bsky.app/profile/biznitz95.bsky.social" target="_blank" rel="noopener" class="btn">Bluesky ↗</a>
+        <a href="https://www.facebook.com/bizet.rodriguez/" target="_blank" rel="noopener" class="btn">Facebook ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>© 2026 BIZET RODRIGUEZ — BUILT IN THE WORKSHOP</span>
+    <span>biznitz95.github.io · <a href="#top">back to top ↑</a></span>
+    <span style="opacity:.6;">psst — try the ↑↑↓↓←→←→ B A</span>
+  </footer>
+
+</main>
+
+<!-- ============ TWEAKS PANEL ============ -->
+<aside class="tweaks" id="tweaks">
+  <div class="tw-head">
+    <h3>Tweaks</h3>
+    <button class="tw-close" aria-label="Close">✕</button>
+  </div>
+  <div class="tw-body">
+    <div class="tw-group">
+      <label>Neon accent</label>
+      <div class="tw-swatches">
+        <button class="tw-sw" data-accent="cyan"   style="background:#1fd0e6" title="Cyan"></button>
+        <button class="tw-sw" data-accent="pink"   style="background:#ff2d6f" title="Hot pink"></button>
+        <button class="tw-sw" data-accent="mint"   style="background:#14d39a" title="Mint"></button>
+        <button class="tw-sw" data-accent="amber"  style="background:#f5a623" title="Amber"></button>
+        <button class="tw-sw" data-accent="violet" style="background:#9b6bff" title="Violet"></button>
+      </div>
+    </div>
+    <div class="tw-group">
+      <label>Display font</label>
+      <div class="tw-fonts">
+        <button class="tw-font" data-font="anton"   style="font-family:'Anton'">Anton</button>
+        <button class="tw-font" data-font="oswald"  style="font-family:'Oswald'">Oswald</button>
+        <button class="tw-font" data-font="archivo" style="font-family:'Archivo Black'">Archivo</button>
+        <button class="tw-font" data-font="teko"    style="font-family:'Teko'">Teko</button>
+      </div>
+    </div>
+    <div class="tw-group">
+      <label>Effects</label>
+      <div class="tw-row">
+        <span>CRT scanlines</span>
+        <span class="tw-switch"><input type="checkbox" id="tw-scan" /><span class="tw-track"></span></span>
+      </div>
+    </div>
+    <p class="tw-note">Tip: drag your own renders onto any image slot — they'll stick. Use the hero arrows (or ← →) to cycle featured builds.</p>
+  </div>
+</aside>
+
+<script>
+  // Tweakable defaults — host rewrites this block on disk so changes persist.
+  window.__TWEAKS = /*EDITMODE-BEGIN*/{
+    "accent": "violet",
+    "font": "oswald",
+    "scanlines": true
+  }/*EDITMODE-END*/;
+
+  // Hero reel content (headline + copy per featured build)
+  window.__REEL = [
+    { name: "Welcome",   eyebrow: "Bizet Rodriguez",        l1: "Brain to",  l2: "built thing.", sub: "3D printing, robotics & AI out of a one-person workshop. This is where the ideas get made real.", hue: "#1fd0e6" },
+    { name: "Axis-6 Arm", eyebrow: "Featured // Robotics",  l1: "Six axes",  l2: "of motion.",   sub: "A from-scratch 6-DOF robotic arm — custom kinematics, 3D-printed structure, ROS control.", hue: "#1fd0e6" },
+    { name: "Articulated Dragon", eyebrow: "Featured // 3D Printing", l1: "Printed", l2: "& alive.", sub: "Print-in-place creatures and functional parts, designed in CAD and tuned on the bed.", hue: "#ff2d6f" },
+    { name: "Vision Stack", eyebrow: "Featured // AI / ML", l1: "Machines", l2: "that see.",   sub: "Computer-vision and ML experiments — teaching hardware to perceive, decide, and react.", hue: "#9b6bff" }
+  ];
+</script>
+<script src="site/image-slot.js"></script>
+<script src="site/site.js?v=16"></script>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <rect width="100" height="100" fill="#07080c"/>
+    <text x="50" y="44" font-family="Arial Black, sans-serif" font-size="30" fill="#1fd0e6" text-anchor="middle" font-weight="900">BR</text>
+    <rect x="34" y="58" width="32" height="3" fill="#1fd0e6"/>
+    <text x="50" y="74" font-family="monospace" font-size="6" fill="#97a0b5" text-anchor="middle">MAKER · BOTS · AI</text>
+  </svg>
+</template>
+
+</body>
 </html>
