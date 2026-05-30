@@ -152,7 +152,7 @@
 
     function progress() {
       const range = (track.offsetHeight - window.innerHeight) || (hero.offsetHeight * 0.92);
-      const top = track.getBoundingClientRect().top + window.scrollY;
+      const top = track.offsetTop || 0;
       return clamp((window.scrollY - top) / range, 0, 1);
     }
 
@@ -173,11 +173,6 @@
       if (ready) return;
       dur = vid.duration || 4;
       ready = true;
-      if (window.matchMedia('(max-width: 960px)').matches) {
-        vid.loop = true;
-        vid.play().catch(() => {});
-        return;
-      }
       target = PAD_IN;
       try { vid.currentTime = PAD_IN; } catch (e) {}
       if (!reduce) {
