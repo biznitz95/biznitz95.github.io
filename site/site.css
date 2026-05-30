@@ -349,6 +349,7 @@ main, .topbar { position: relative; z-index: 2; }
   .hero-stage { width: 100%; opacity: .65; }
   .hero-stage::before { background: linear-gradient(90deg, var(--bg) 0%, transparent 60%), linear-gradient(0deg, var(--bg) 6%, transparent 60%); }
   .hero-content { max-width: 100%; }
+  .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; }
   .hud-corners { display: none; }
   .reel { left: var(--gut); right: auto; }
   .about-grid { grid-template-columns: 1fr; }
@@ -359,7 +360,6 @@ main, .topbar { position: relative; z-index: 2; }
 }
 @media (max-width: 560px) {
   .skill-cols { grid-template-columns: 1fr; }
-  .hero-cta { flex-direction: column; align-items: stretch; }
   .reel .label { display: none; }
 }
 
