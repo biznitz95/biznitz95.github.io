@@ -355,7 +355,8 @@ main, .topbar { position: relative; z-index: 2; }
   .about-grid { grid-template-columns: 1fr; }
   .skill-cols { grid-template-columns: repeat(2, 1fr); }
   .proj.big, .proj.mid, .proj.sm { grid-column: span 6; min-height: 320px; }
-  .log { grid-template-columns: 90px 1fr; }
+  .log { grid-template-columns: 90px 1fr; gap: 16px; }
+  .log .lthumb { width: 90px; height: 60px; }
   .log .ldate, .log .larrow { display: none; }
 }
 @media (max-width: 560px) {
