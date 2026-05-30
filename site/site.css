@@ -41,7 +41,9 @@ body {
   font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  max-width: 100vw;
+  width: 100%;
 }
 body::-webkit-scrollbar { width: 11px; }
 body::-webkit-scrollbar-track { background: var(--bg); }
@@ -346,7 +348,7 @@ main, .topbar { position: relative; z-index: 2; }
 @media (max-width: 960px) {
   .topbar nav { display: none; }
   .topbar .menu-btn { display: grid; place-items: center; margin-left: auto; width: 42px; height: 42px; border: 1.5px solid var(--line-2); background: transparent; color: var(--text); cursor: pointer; }
-  .hero-stage { width: 100%; opacity: .65; }
+  .hero-stage { position: static; width: 100%; opacity: .65; }
   .hero-stage::before { background: linear-gradient(90deg, var(--bg) 0%, transparent 60%), linear-gradient(0deg, var(--bg) 6%, transparent 60%); }
   .hero-content { max-width: 100%; }
   .hero-cta { flex-direction: column; align-items: stretch; gap: 10px; width: 100%; }
