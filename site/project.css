@@ -70,6 +70,11 @@
 .specs-list .sv { color: var(--text); font-size: 15.5px; }
 .specs-list .sv .chip { display: inline-block; margin: 0 6px 6px 0; }
 
+/* ---- in-action video ---- */
+.pj-video { border: 1px solid var(--line-2); background: #000; overflow: hidden; }
+.pj-video video { width: 100%; display: block; max-height: 72vh; }
+.pj-video .vcap { font-family: var(--mono); font-size: 11px; color: var(--faint); letter-spacing: .08em; padding: 10px 0; }
+
 /* ---- next project ---- */
 .pj-next { display: flex; align-items: center; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); padding: 40px var(--gut); max-width: var(--maxw); margin: 0 auto; flex-wrap: wrap; }
 .pj-next .nlabel { font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); }
