@@ -52,7 +52,7 @@
     <div class="pj-figure reveal">
       <div class="pj-figure-inner">
         <div class="hud-corners"><span class="tl" style="top:14px;left:14px;"></span><span class="tr" style="top:14px;right:14px;"></span><span class="bl" style="bottom:14px;left:14px;"></span><span class="br" style="bottom:14px;right:14px;"></span></div>
-        <image-slot id="pj-hero-img" src="site/img/self-driving.jpg" fit="cover" placeholder="Drop the headline shot of this build (16:9)"></image-slot>
+        <img src="site/img/self-driving.jpg" alt="Self-driving vehicle with LiDAR" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="cap"><span>FIG.01 — chassis + LiDAR, current build</span><span>1/6</span></div>
     </div>
@@ -87,7 +87,7 @@
         <div class="srow"><div class="sk">Sensing</div><div class="sv">360° spinning LiDAR + onboard camera</div></div>
         <div class="srow"><div class="sk">Brains</div><div class="sv">Microcontroller + single-board computer</div></div>
         <div class="srow"><div class="sk">Power</div><div class="sv">Li-ion pack, switchable on-board</div></div>
-        <div class="srow"><div class="sk">Toolchain</div><div class="sv"><span class="chip">Fusion 360</span><span class="chip">Python</span><span class="chip">C++</span><span class="chip">OpenCV</span><span class="chip">Arduino</span></div></div>
+        <div class="srow"><div class="sk">Toolchain</div><div class="sv"><span class="chip">Fusion 360</span><span class="chip">Python</span><span class="chip">Raspberry Pi</span><span class="chip">OpenCV</span></div></div>
         <div class="srow"><div class="sk">Status</div><div class="sv">Sensors live · autonomy in progress</div></div>
       </div>
     </div>
@@ -105,7 +105,6 @@
 
       <div class="process">
         <div class="step reveal">
-          <div class="step-media"><image-slot id="pj-step-1" src="site/img/self-driving-2.jpg" fit="cover" placeholder="CAD / chassis photo"></image-slot></div>
           <div class="step-body">
             <div class="num">STEP 01</div>
             <h4>Start from the kit</h4>
@@ -114,7 +113,7 @@
         </div>
 
         <div class="step reveal">
-          <div class="step-media"><image-slot id="pj-step-2" src="site/img/self-driving.jpg" fit="cover" placeholder="Wiring / electronics photo"></image-slot></div>
+          <div class="step-media"><img src="site/img/self-driving.jpg" alt="Electronics and wiring" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <div class="step-body">
             <div class="num">STEP 02</div>
             <h4>Wire the brains</h4>
@@ -123,7 +122,6 @@
         </div>
 
         <div class="step reveal">
-          <div class="step-media"><image-slot id="pj-step-3" src="site/img/self-driving-2.jpg" fit="cover" placeholder="LiDAR map / driving demo"></image-slot></div>
           <div class="step-body">
             <div class="num">STEP 03</div>
             <h4>Teach it to see</h4>
@@ -135,21 +133,6 @@
   </section>
 
   <!-- ============ GALLERY ============ -->
-  <section class="section" id="gallery">
-    <div class="wrap">
-      <div class="kicker reveal">
-        <span class="idx">[ 04 ]</span>
-        <h2>Gallery</h2>
-        <span class="rule"></span>
-        <span class="meta">MORE ANGLES</span>
-      </div>
-      <div class="pj-gallery reveal">
-        <div class="g wide"><image-slot id="pj-gal-1" src="site/img/self-driving-2.jpg" fit="cover" placeholder="wide shot"></image-slot></div>
-        <div class="g tall"><image-slot id="pj-gal-2" src="site/img/self-driving.jpg" fit="cover" placeholder="tall detail"></image-slot></div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ NEXT PROJECT ============ -->
   <div class="pj-next reveal">
     <div>
@@ -171,7 +154,6 @@
   // match the home page's look; this page has no Tweaks panel of its own
   window.__TWEAKS = { accent: "violet", font: "oswald", scanlines: true };
 </script>
-<script src="site/image-slot.js"></script>
 <script src="site/site.js?v=16"></script>
 
 <template id="__bundler_thumbnail">

@@ -52,7 +52,7 @@
     <div class="pj-figure reveal">
       <div class="pj-figure-inner">
         <div class="hud-corners"><span class="tl" style="top:14px;left:14px;"></span><span class="tr" style="top:14px;right:14px;"></span><span class="bl" style="bottom:14px;left:14px;"></span><span class="br" style="bottom:14px;right:14px;"></span></div>
-        <image-slot id="pj-hero-img" src="site/img/porsche.jpg" fit="cover" placeholder="Drop the headline shot of this build (16:9)"></image-slot>
+        <img src="site/img/porsche.jpg" alt="Finished Porsche 911 GT3 RS build" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
       <div class="cap"><span>FIG.01 — finished GT3 RS, candy purple</span><span>1/6</span></div>
     </div>
@@ -87,7 +87,7 @@
         <div class="srow"><div class="sk">Finish</div><div class="sv">Sanded, primed, candy-purple metallic + gold wheels</div></div>
         <div class="srow"><div class="sk">Chassis</div><div class="sv">RC platform — steering + drive</div></div>
         <div class="srow"><div class="sk">Aero</div><div class="sv">Printed wing, splitter &amp; diffuser details</div></div>
-        <div class="srow"><div class="sk">Toolchain</div><div class="sv"><span class="chip">Slicer</span><span class="chip">FDM</span><span class="chip">Sanding</span><span class="chip">Primer</span><span class="chip">Airbrush</span></div></div>
+        <div class="srow"><div class="sk">Toolchain</div><div class="sv"><span class="chip">BambuStudio</span><span class="chip">X1C</span><span class="chip">Sanding</span><span class="chip">Primer</span><span class="chip">Spray Painted</span><span class="chip">CyberBrick</span></div></div>
         <div class="srow"><div class="sk">Status</div><div class="sv">Painted &amp; driveable</div></div>
       </div>
     </div>
@@ -105,16 +105,16 @@
 
       <div class="process">
         <div class="step reveal">
-          <div class="step-media"><image-slot id="pj-step-1" src="site/img/porsche-primer.jpg" fit="cover" placeholder="CAD / chassis photo"></image-slot></div>
+          <div class="step-media"><img src="site/img/porsche-primer.jpg" alt="Printed body after priming" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <div class="step-body">
             <div class="num">STEP 01</div>
-            <h4>Split &amp; print the body</h4>
-            <p>Cut the body into bed-sized panels in CAD, printed each one, then bonded and filled the seams into one clean shell.</p>
+            <h4>Print the body</h4>
+            <p>Started with a complete pre-designed body — no CAD needed. Printed it on the X1C, then bonded and filled the seams into one clean shell.</p>
           </div>
         </div>
 
         <div class="step reveal">
-          <div class="step-media"><image-slot id="pj-step-2" src="site/img/porsche-paint.jpg" fit="cover" placeholder="Wiring / electronics photo"></image-slot></div>
+          <div class="step-media"><img src="site/img/porsche-paint.jpg" alt="Painting process" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <div class="step-body">
             <div class="num">STEP 02</div>
             <h4>Bodywork &amp; paint</h4>
@@ -123,7 +123,7 @@
         </div>
 
         <div class="step reveal">
-          <div class="step-media"><image-slot id="pj-step-3" src="site/img/porsche.jpg" fit="cover" placeholder="Drop a final shot"></image-slot></div>
+          <div class="step-media"><img src="site/img/porsche.jpg" alt="Finished Porsche build" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
           <div class="step-body">
             <div class="num">STEP 03</div>
             <h4>Wheels &amp; assembly</h4>
@@ -144,9 +144,9 @@
         <span class="meta">MORE ANGLES</span>
       </div>
       <div class="pj-gallery reveal">
-        <div class="g sq"><image-slot id="pj-gal-1" src="site/img/porsche.jpg" fit="cover" placeholder="wide shot"></image-slot></div>
-        <div class="g sq"><image-slot id="pj-gal-2" src="site/img/porsche-paint.jpg" fit="cover" placeholder="tall detail"></image-slot></div>
-        <div class="g sq"><image-slot id="pj-gal-3" src="site/img/porsche-primer.jpg" fit="cover" placeholder="Drop a shot"></image-slot></div>
+        <div class="g sq"><img src="site/img/porsche.jpg" alt="Finished Porsche build" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="g sq"><img src="site/img/porsche-paint.jpg" alt="Paint process" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+        <div class="g sq"><img src="site/img/porsche-primer.jpg" alt="Primer stage" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
       </div>
     </div>
   </section>
@@ -172,7 +172,6 @@
   // match the home page's look; this page has no Tweaks panel of its own
   window.__TWEAKS = { accent: "violet", font: "oswald", scanlines: true };
 </script>
-<script src="site/image-slot.js"></script>
 <script src="site/site.js?v=16"></script>
 
 <template id="__bundler_thumbnail">

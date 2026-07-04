@@ -55,7 +55,6 @@
     const glowEl = document.querySelector('.hero .bg-glow');
     const REEL = window.__REEL || [];
     let cur = 0, timer = null;
-    const heroChar = document.querySelector('.hero-char');
     const N = REEL.length || 1;
 
     function go(i, user) {
@@ -68,9 +67,7 @@
         if (eyebrowTag) eyebrowTag.textContent = data.eyebrow;
         if (labelEl) labelEl.innerHTML = '<b>' + data.name + '</b> &nbsp;/&nbsp; ' + String(cur + 1).padStart(2, '0') + '—' + String(N).padStart(2, '0');
       }
-      // re-trigger the headline entrance + a subtle character drift for life
       if (hlEl) { hlEl.classList.remove('swap'); void hlEl.offsetWidth; hlEl.classList.add('swap'); }
-      if (heroChar) { heroChar.style.transform = 'scale(1.06) translateX(' + (cur % 2 ? '-' : '') + '6px)'; }
       if (user) restart();
     }
     function next() { go(cur + 1); }
@@ -123,8 +120,8 @@
     /* ---------- terminal typing ---------- */
     runTerminal();
 
-    /* ---------- scroll-driven hero video ---------- */
-    heroVideoScrub();
+    /* ---------- hero image slideshow ---------- */
+    heroImageSlide();
 
     /* ---------- tweaks ---------- */
     setupTweaks();
@@ -134,61 +131,18 @@
   }
 
   /* ============================================================
-     HERO VIDEO — scrubs with scroll; the figure animates as you move
+     HERO IMAGE SLIDESHOW — cycles project photos every 5 seconds
      ============================================================ */
-  function heroVideoScrub() {
-    const vid = document.querySelector('video.hero-char');
-    const hero = document.querySelector('.hero');
-    if (!vid || !hero) return;
-    const track = (hero.parentElement && hero.parentElement.classList.contains('hero-track')) ? hero.parentElement : hero;
-
-    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    // skip the white first frame + any tail glitch
-    const PAD_IN = 0.1, PAD_OUT = 0.1;
-    let dur = 0, target = 0, raf = null, ready = false;
-
-    function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
-
-    function progress() {
-      const range = (track.offsetHeight - window.innerHeight) || (hero.offsetHeight * 0.92);
-      const top = track.offsetTop || 0;
-      return clamp((window.scrollY - top) / range, 0, 1);
-    }
-
-    function settle() {
-      if (!ready) return;
-      const t0 = PAD_IN, t1 = Math.max(t0, dur - PAD_OUT);
-      const want = t0 + (t1 - t0) * progress();
-      // ease toward target so seeking feels smooth, not steppy
-      target += (want - target) * 0.35;
-      if (Math.abs(want - target) < 0.004) target = want;
-      try { vid.currentTime = target; } catch (e) {}
-      if (Math.abs(want - target) > 0.004) raf = requestAnimationFrame(settle);
-      else raf = null;
-    }
-    function onScroll() { if (!raf) raf = requestAnimationFrame(settle); }
-
-    function start() {
-      if (ready) return;
-      dur = vid.duration || 4;
-      ready = true;
-      target = PAD_IN;
-      try { vid.currentTime = PAD_IN; } catch (e) {}
-      if (!reduce) {
-        window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', onScroll, { passive: true });
-        settle();
-      }
-    }
-
-    // prime decoding so seeks paint immediately, then hand control to scroll
-    vid.addEventListener('loadedmetadata', () => {
-      const prime = vid.play();
-      if (prime && prime.then) prime.then(() => { vid.pause(); start(); }).catch(start);
-      else { try { vid.pause(); } catch (e) {} start(); }
-    });
-    if (vid.readyState >= 1) vid.dispatchEvent(new Event('loadedmetadata'));
+  function heroImageSlide() {
+    const imgs = [...document.querySelectorAll('.hero-char img')];
+    if (imgs.length < 2) return;
+    let cur = 0;
+    imgs[0].classList.add('active');
+    setInterval(() => {
+      imgs[cur].classList.remove('active');
+      cur = (cur + 1) % imgs.length;
+      imgs[cur].classList.add('active');
+    }, 5000);
   }
 
   /* ============================================================
